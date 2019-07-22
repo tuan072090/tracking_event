@@ -1,4 +1,4 @@
-module tracking_event
+module github.com/tuan072090/tracking_event
 
 go 1.12
 
