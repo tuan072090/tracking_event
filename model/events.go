@@ -2,12 +2,14 @@ package model
 
 // Event struct is the structure of data
 type Event struct {
-	Name      string `validate:"required" form:"name"`
-	Device    string `validate:"required" form:"device"`
-	Referer   string `form:"referer"`
-	UserAgent string `form:"user_agent"`
+	Type      string `validate:"required" form:"type"`
+	Category    string `validate:"required" form:"category"`
+	Action   string `form:"action"`
+	Name string `form:"action"`
+	Value string `form:"value"`
 	CreatedAt int    `form:"created_at"`
-	UserData  User   `form:"user_data"`
+	UserData  User   `form:"user_data" validate:"required"`
+	More EventMore `form:"more" validate:"required"`
 }
 
 // User struct is the structure of user data in event structure
@@ -16,4 +18,8 @@ type User struct {
 	Phone string
 	Name  string
 	More  string
+}
+
+type EventMore struct {
+	Referral string `validate:"required"`
 }

@@ -15,25 +15,17 @@ var Validate *validator.Validate
 func InitGin() {
 	r := gin.Default()
 
+	gin.SetMode("release")
+
 	Validate = validator.New()
 
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
-
+	r.GET("/ping", ping)
 	//	add user event
-	r.POST("/user-event", AddUserEvent)
+	r.POST("/user-event", service.EventAuthen, AddUserEvent)
+	r.GET("events", QueryEvent)
 
-	var port = ":3000"
-	fmt.Println("port env là...", os.Getenv("PORT"))
-	if os.Getenv("PORT") != "" {
-		port = ":" + os.Getenv("PORT")
-	}
-
-	err := r.Run(port)
-
+	fmt.Println("Listen on port " + service.GetPort())
+	err := r.Run(":" + service.GetPort())
 	if err != nil {
 		os.Exit(1)
 	}
@@ -49,4 +41,10 @@ func CreateTableEvent() {
 		return
 	}
 	fmt.Println("ok")
+}
+
+func ping(c *gin.Context) {
+	c.JSON(200, gin.H{
+		"message": "pong",
+	})
 }

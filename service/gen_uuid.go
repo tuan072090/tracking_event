@@ -15,7 +15,13 @@ import (
 	"github.com/satori/go.uuid"
 	"github.com/segmentio/ksuid"
 	"github.com/sony/sonyflake"
+	"github.com/speps/go-hashids"
 )
+
+/*
+	Link tham khảo: https://blog.kowalczyk.info/article/JyRZ/generating-good-unique-ids-in-go.html
+ */
+
 
 func genShortUUID() {
 	id := shortuuid.New()
@@ -68,4 +74,29 @@ func genUUIDv4() {
 	id := uuid.NewV4()
 
 	fmt.Printf("github.com/satori/go.uuid:      %s\n", id)
+}
+
+func HashIds(){
+
+	startTime := time.Now().UnixNano()
+
+	hd := hashids.NewData()
+	hd.Salt = "this is my salt"
+	hd.MinLength = 30
+	h, _ := hashids.NewWithData(hd)
+
+	number := 1563878884
+
+	e, _ := h.Encode([]int{number})
+	fmt.Println("Chuỗi hash", e)
+
+	d, _ := h.DecodeWithError(e)
+
+	fmt.Println("Chuỗi decode", d)
+
+	endTime := time.Now().UnixNano()
+
+	fmt.Println("endTime...", endTime)
+
+	fmt.Println("tốn hết ", endTime-startTime)
 }

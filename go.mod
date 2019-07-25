@@ -1,4 +1,4 @@
-module github.com/tuan072090/tracking_event
+module tracking_event
 
 go 1.12
 
@@ -17,5 +17,7 @@ require (
 	github.com/satori/go.uuid v1.2.0
 	github.com/segmentio/ksuid v1.0.2
 	github.com/sony/sonyflake v1.0.0
+	github.com/speps/go-hashids v2.0.0+incompatible
+	google.golang.org/api v0.7.0
 	gopkg.in/go-playground/validator.v9 v9.29.1
 )

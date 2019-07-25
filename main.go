@@ -8,6 +8,8 @@ import (
 func main(){
 	fmt.Println("Starting gin")
 
+	//service.CreateNewTable()
+
 	//controller.CreateTableEvent()
 	controller.InitGin()
 }
