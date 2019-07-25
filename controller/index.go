@@ -9,6 +9,7 @@ import (
 	"gopkg.in/go-playground/validator.v9"
 )
 
+// Validate dùng để validate payload clien submit lên
 var Validate *validator.Validate
 
 // InitGin inits the routers of gin
@@ -20,6 +21,7 @@ func InitGin() {
 	Validate = validator.New()
 
 	r.GET("/ping", ping)
+	r.GET("/uid", getUID)
 	//	add user event
 	r.POST("/user-event", service.EventAuthen, AddUserEvent)
 	r.GET("events", QueryEvent)
@@ -46,5 +48,11 @@ func CreateTableEvent() {
 func ping(c *gin.Context) {
 	c.JSON(200, gin.H{
 		"message": "pong",
+	})
+}
+
+func getUID(c *gin.Context) {
+	c.JSON(200, gin.H{
+		"uid": service.GenXid(),
 	})
 }

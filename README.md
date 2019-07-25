@@ -1,5 +1,10 @@
 # Tracking_event service
 
+**Thư viện sử dụng**
+1. Gin gonic cho restAPI
+2. go-playground để validate
+3. và 1 đống thư viện để gen UID
+
 **Run in debug mode**
 -     `PORT=1234 go run main`
 - Default port is 8080

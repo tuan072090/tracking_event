@@ -12,7 +12,7 @@ import (
 	"github.com/lithammer/shortuuid"
 	"github.com/oklog/ulid"
 	"github.com/rs/xid"
-	"github.com/satori/go.uuid"
+	uuid "github.com/satori/go.uuid"
 	"github.com/segmentio/ksuid"
 	"github.com/sony/sonyflake"
 	"github.com/speps/go-hashids"
@@ -20,22 +20,28 @@ import (
 
 /*
 	Link tham khảo: https://blog.kowalczyk.info/article/JyRZ/generating-good-unique-ids-in-go.html
- */
+*/
 
-
-func genShortUUID() {
+func genShortUUID() string {
 	id := shortuuid.New()
 	fmt.Printf("github.com/lithammer/shortuuid: %s\n", id)
+
+	return id
 }
 
-func genUUID() {
+func genUUID() string {
 	id := guuid.New()
 	fmt.Printf("github.com/google/uuid:         %s\n", id.String())
+
+	return id.String()
 }
 
-func genXid() {
+// GenXid trả về unique với 4 bytes of time (seconds) + 3 byte machine id + 2 byte process id + 3 bytes random
+func GenXid() string {
 	id := xid.New()
 	fmt.Printf("github.com/rs/xid:              %s\n", id.String())
+
+	return id.String()
 }
 
 func genKsuid() {
@@ -76,7 +82,7 @@ func genUUIDv4() {
 	fmt.Printf("github.com/satori/go.uuid:      %s\n", id)
 }
 
-func HashIds(){
+func HashIds() {
 
 	startTime := time.Now().UnixNano()
 
